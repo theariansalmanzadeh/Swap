@@ -1,0 +1,5 @@
+@import "../layouts/pages.scss";
+
+.homePage {
+  @include pagesLayout;
+}

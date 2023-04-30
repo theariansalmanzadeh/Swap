@@ -1,0 +1,37 @@
+@import "../utils/variables.scss";
+
+.walletPanel {
+  background-color: $secondaryColLight;
+  padding: 0.4rem 1rem;
+  border-radius: $buttonBroderRadius;
+  color: $primaryCol;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  & .walletLogo {
+    width: 2rem;
+  }
+  & p {
+    margin: 0;
+  }
+}
+
+.dropDown {
+  position: absolute;
+  padding: 0.5rem 0rem;
+  right: 2vw;
+  margin-top: 1rem;
+  background-color: $secondaryColLight;
+  border-radius: $buttonBroderRadius;
+  color: $primaryWhite;
+  & ul {
+    list-style: none;
+    padding: 0;
+    & li {
+      padding: 0.5rem 4rem;
+      &:nth-of-type(1) {
+        border-bottom: 1px solid $secondaryColDark;
+      }
+    }
+  }
+}

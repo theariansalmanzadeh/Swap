@@ -1,0 +1,5 @@
+@import "../layouts/pages.scss";
+
+.swapPage {
+  @include pagesLayout;
+}

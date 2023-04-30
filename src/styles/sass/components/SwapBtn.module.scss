@@ -1,0 +1,23 @@
+@import "../utils/variables.scss";
+@import "../utils/animations.scss";
+
+.swapBtn {
+  width: 65%;
+  padding: 1rem 0rem;
+  margin: 0.5rem 0rem;
+  border-radius: $buttonBroderRadius;
+  border: none;
+  background-color: $secondaryColDark;
+  color: $secondaryWhite;
+  font-size: $fontSize1;
+  cursor: pointer;
+
+  &.active {
+    border: 1px solid $thirdCol;
+  }
+  & .loader {
+    color: $thirdCol;
+
+    @include loadingWallet;
+  }
+}

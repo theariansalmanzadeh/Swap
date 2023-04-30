@@ -1,8 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import { web3Slice } from "../features/web3Slice";
+import { tokenPriceFinder } from "../features/tokenPriceSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    web3: web3Slice.reducer,
+    tokenPrice: tokenPriceFinder.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

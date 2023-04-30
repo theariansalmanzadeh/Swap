@@ -1,0 +1,17 @@
+@import "../utils/variables.scss";
+
+.walletBtn {
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: $buttonBroderRadius;
+  border: none;
+  background-color: $secondaryCol;
+  color: $primaryCol;
+  font-size: $fontSize1;
+  &:hover {
+    background-color: $secondaryColLight;
+    cursor: pointer;
+  }
+}
