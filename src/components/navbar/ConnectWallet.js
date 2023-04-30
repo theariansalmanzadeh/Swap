@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
 import { connectToWallet, setProvider } from "../../features/web3Slice.js";
@@ -14,7 +14,7 @@ function ConnectWallet() {
 
   const dispatch = useDispatch();
   const isLoadingConnect = useSelector(({ web3 }) => web3.isLoading);
-  const signer = useSelector(({ web3 }) => web3.signer);
+  // const signer = useSelector(({ web3 }) => web3.signer);
 
   const connectWalletHandler = async () => {
     if (!window.ethereum) {

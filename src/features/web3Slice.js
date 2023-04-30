@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
 
 const chainID = 1;
 
