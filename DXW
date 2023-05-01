@@ -1,0 +1,17 @@
+[33mcommit 468422667c01eef6da6f240c3d563a8dfb4042a4[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mpolygon[m[33m, [m[1;32mcheckout[m[33m)[m
+Author: Arian salmanzadeh <salmanzadeharian@gmail.com>
+Date:   Sun Apr 30 09:59:31 2023 +0430
+
+    unnecessary imports omited
+
+[33mcommit 2e3bf902989c85505d282e7e5001c26e7deb2922[m
+Author: Arian salmanzadeh <salmanzadeharian@gmail.com>
+Date:   Sun Apr 30 09:55:38 2023 +0430
+
+    swap with bancor network finished
+
+[33mcommit 2b3eab14d20604ca206cebbc6d05ee38db0033c5[m
+Author: Arian salmanzadeh <salmanzadeharian@gmail.com>
+Date:   Sat Apr 29 21:04:06 2023 +0430
+
+    Initialize project using Create React App

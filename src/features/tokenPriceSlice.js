@@ -9,7 +9,7 @@ const initialState = {
   BancorContract: {},
 };
 
-export const tokenPriceFinder = createSlice({
+export const bancorSlice = createSlice({
   name: "tokenPriceFinder",
   initialState,
   reducers: {
@@ -36,7 +36,7 @@ export const tokenPriceFinder = createSlice({
 export const getPriceToken = createAsyncThunk(
   "token/getPriceToken",
   async (inputAmount, { getState }) => {
-    const { BancorContract } = getState().tokenPrice;
+    const { BancorContract } = getState().bancorSwap;
     console.log(BancorContract, inputAmount);
 
     const res = await BancorContract.tradeOutputBySourceAmount(
@@ -51,4 +51,4 @@ export const getPriceToken = createAsyncThunk(
   }
 );
 
-export const { setContract, setInputAmount } = tokenPriceFinder.actions;
+export const { setContract, setInputAmount } = bancorSlice.actions;

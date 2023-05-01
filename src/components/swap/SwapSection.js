@@ -1,19 +1,32 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import styles from "../../styles/sass/layouts/swap.module.scss";
 import SwapButton from "./SwapButton.js";
 import ethLogo from "../../assets/ethereum.png";
 import mtcLogo from "../../assets/matic.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { getPriceToken, setInputAmount } from "../../features/tokenPriceSlice";
+import DisplayPrices from "./DisplayPrices";
+import { getPairs } from "../../features/sushiSwapSlice";
+import { isObejctEmpty } from "../../utils/helper";
 
 function SwapSection() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [balanceError, setBalanceError] = useState(false);
 
   const dispatch = useDispatch();
-  const tokeOutput = useSelector(({ tokenPrice }) => tokenPrice.tokenPriceOut);
+  const tokeOutput = useSelector(({ bancorSwap }) => bancorSwap.tokenPriceOut);
   const accountAddress = useSelector(({ web3 }) => web3.accountAddress);
   const provider = useSelector(({ web3 }) => web3.provider);
+
+  const factoryContratSushi = useSelector(
+    ({ sushiSwap }) => sushiSwap.sushiFactoryContract
+  );
+  console.log(factoryContratSushi);
+
+  const factoryInctance = useMemo(
+    () => factoryContratSushi,
+    [factoryContratSushi]
+  );
 
   const inputRef = useRef();
 
@@ -51,6 +64,11 @@ function SwapSection() {
     setIsLoggedIn(true);
   }, [accountAddress]);
 
+  useEffect(() => {
+    if (isObejctEmpty(factoryInctance)) return;
+    dispatch(getPairs()).unwrap();
+  }, [factoryInctance, dispatch]);
+
   return (
     <div className={styles.swapSection}>
       <div className={styles.swapWrapper}>
@@ -75,8 +93,9 @@ function SwapSection() {
               <input type="text" value={tokeOutput} placeholder="0.0MTC" />
               <img src={mtcLogo} alt="ethereum logo" />
             </div>
-            <SwapButton balanceError={balanceError} isLoggedIn={isLoggedIn} />
+            {accountAddress !== "" && <DisplayPrices />}
           </div>
+          <SwapButton balanceError={balanceError} isLoggedIn={isLoggedIn} />
         </form>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { CgSpinnerTwoAlt } from "react-icons/cg";
 import styles from "../../styles/sass/components/SwapBtn.module.scss";
 
 function SwapButton({ isLoggedIn, balanceError }) {
-  const isLoadingPrice = useSelector(({ tokenPrice }) => tokenPrice.isLoading);
+  const isLoadingPrice = useSelector(({ bancorSwap }) => bancorSwap.isLoading);
 
   const swapHandler = async (e) => {
     e.preventDefault();

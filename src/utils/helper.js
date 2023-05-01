@@ -1,6 +1,12 @@
 import { ethers } from "ethers";
 import { bancorAddress, abi } from "./BancorVariables";
-import { sushiRouter, RouterABI } from "./sushiVariables";
+import {
+  sushiRouter,
+  RouterABI,
+  factoryContract,
+  PoolABI,
+  FacotyABI,
+} from "./sushiVariables";
 
 export const getPools = async () => {
   const res = await fetch("https://api-v3.bancor.network/bnt");
@@ -14,8 +20,22 @@ export const createContractBancor = (provider) => {
   return bancorContract;
 };
 
-export const createContractSushi = (provider) => {
+export const createContractSushiRouter = (provider) => {
   const sushiContract = new ethers.Contract(sushiRouter, RouterABI, provider);
+  console.log(sushiContract);
+  return sushiContract;
+};
+export const createContractSushiFactory = (provider) => {
+  const sushiContract = new ethers.Contract(
+    factoryContract,
+    FacotyABI,
+    provider
+  );
+  console.log(sushiContract);
+  return sushiContract;
+};
+export const createContractSushiPool = (poolAddress, provider) => {
+  const sushiContract = new ethers.Contract(poolAddress, PoolABI, provider);
   console.log(sushiContract);
   return sushiContract;
 };
@@ -45,4 +65,8 @@ export const getPriceBancor = async (bancorContract, signer) => {
     );
   // console.log(Number(ethers.utils.parseUnits(String(res))));
   console.log(Number(res));
+};
+
+export const isObejctEmpty = (obj) => {
+  return Object.keys(obj).length === 0;
 };

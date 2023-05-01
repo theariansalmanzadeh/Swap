@@ -5,9 +5,17 @@ import { connectToWallet, setProvider } from "../../features/web3Slice.js";
 import { setContract } from "../../features/tokenPriceSlice.js";
 import ConnectedWallet from "./ConnectedWallet.js";
 import LoadingWallet from "../loadingWallet/LoadingWallet.js";
-import { createContractBancor } from "../../utils/helper.js";
+import {
+  createContractBancor,
+  createContractSushiFactory,
+  createContractSushiRouter,
+} from "../../utils/helper.js";
 import { BiWalletAlt } from "react-icons/bi";
 import styles from "../../styles/sass/components/walletBtn.module.scss";
+import {
+  setFactoryContract,
+  setRouterContract,
+} from "../../features/sushiSwapSlice.js";
 
 function ConnectWallet() {
   const [isWallet, setIsWallet] = useState(false);
@@ -26,8 +34,10 @@ function ConnectWallet() {
       dispatch(setProvider(provider));
       await dispatch(connectToWallet(provider)).unwrap();
 
-      const contract = createContractBancor(provider);
-      dispatch(setContract(contract));
+      dispatch(setContract(createContractBancor(provider)));
+      dispatch(setFactoryContract(createContractSushiFactory(provider)));
+      dispatch(setRouterContract(createContractSushiRouter(provider)));
+
       setIsWallet(true);
     } catch (e) {
       setIsWallet(false);
