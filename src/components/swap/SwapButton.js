@@ -20,7 +20,7 @@ function SwapButton({ isLoggedIn, balanceError, value }) {
       {isLoadingPrice && <CgSpinnerTwoAlt className={styles.loader} />}
       {!isLoggedIn && <span>connect wallet</span>}
       {balanceError && <span>not enough balance</span>}
-      {isLoggedIn && !isLoadingPrice && <span>Swap</span>}
+      {isLoggedIn && !isLoadingPrice && !balanceError && <span>Swap</span>}
     </button>
   );
 }
