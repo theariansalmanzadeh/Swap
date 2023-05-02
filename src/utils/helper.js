@@ -8,12 +8,6 @@ import {
   FacotyABI,
 } from "./sushiVariables";
 
-export const getPools = async () => {
-  const res = await fetch("https://api-v3.bancor.network/bnt");
-  const pool = await res.json();
-  console.log(pool);
-};
-
 export const createContractBancor = (provider) => {
   const bancorContract = new ethers.Contract(bancorAddress, abi, provider);
   console.log(bancorContract);
@@ -63,7 +57,7 @@ export const getPriceBancor = async (bancorContract, signer) => {
       "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
       1
     );
-  // console.log(Number(ethers.utils.parseUnits(String(res))));
+
   console.log(Number(res));
 };
 

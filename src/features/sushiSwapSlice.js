@@ -1,9 +1,9 @@
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createContractSushiPool } from "../utils/helper";
 
 const initialState = {
-  maticAddress: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+  maticAddress: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
   wethAddress: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
   wethReserve: "",
   maticReserve: "",
@@ -75,7 +75,11 @@ export const getPairs = createAsyncThunk(
 
     [_reserve0, _reserve1] =
       wethAddress === token0 ? [_reserve0, _reserve1] : [_reserve1, _reserve0];
-    console.log("22");
+    console.log(Number(_reserve0), Number(_reserve1));
+    console.log(
+      ethers.utils.formatEther(_reserve0),
+      ethers.utils.formatEther(_reserve1)
+    );
 
     return { pairPool, poolContract, _reserve0, _reserve1 };
   }
