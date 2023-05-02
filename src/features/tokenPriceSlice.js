@@ -51,4 +51,9 @@ export const getPriceToken = createAsyncThunk(
   }
 );
 
+export const bancorExecuteSwap = createAsyncThunk(
+  "tokens/excuteSwap",
+  async (_, { getState }) => {}
+);
+
 export const { setContract, setInputAmount } = bancorSlice.actions;

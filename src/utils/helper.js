@@ -70,3 +70,11 @@ export const getPriceBancor = async (bancorContract, signer) => {
 export const isObejctEmpty = (obj) => {
   return Object.keys(obj).length === 0;
 };
+
+export const containsOnlyNumbers = (str) => {
+  return /^(\d+.)*(\d+)$/.test(str);
+};
+
+export const listBestPrice = (...prices) => {
+  return prices.sort((a, b) => parseFloat(b) - parseFloat(a))[0];
+};

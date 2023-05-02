@@ -6,40 +6,49 @@ import mtcLogo from "../../assets/matic.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { getPriceToken, setInputAmount } from "../../features/tokenPriceSlice";
 import DisplayPrices from "./DisplayPrices";
-import { getPairs } from "../../features/sushiSwapSlice";
-import { isObejctEmpty } from "../../utils/helper";
+import {
+  getPairs,
+  getPriceSwap,
+  setTokenPriceOut,
+} from "../../features/sushiSwapSlice";
+import {
+  isObejctEmpty,
+  listBestPrice,
+  containsOnlyNumbers,
+} from "../../utils/helper";
 
 function SwapSection() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [Amount, setAmount] = useState(0);
   const [balanceError, setBalanceError] = useState(false);
 
   const dispatch = useDispatch();
-  const tokeOutput = useSelector(({ bancorSwap }) => bancorSwap.tokenPriceOut);
+
+  const tokeOutputBancor = useSelector(
+    ({ bancorSwap }) => bancorSwap.tokenPriceOut
+  );
+  const tokeOutputSushi = useSelector(
+    ({ sushiSwap }) => sushiSwap.tokenPriceSushi
+  );
   const accountAddress = useSelector(({ web3 }) => web3.accountAddress);
   const provider = useSelector(({ web3 }) => web3.provider);
 
   const factoryContratSushi = useSelector(
     ({ sushiSwap }) => sushiSwap.sushiFactoryContract
   );
-  console.log(factoryContratSushi);
 
   const factoryInctance = useMemo(
     () => factoryContratSushi,
     [factoryContratSushi]
   );
 
-  const inputRef = useRef();
-
-  const swapHandler = () => {};
-
-  function containsOnlyNumbers(str) {
-    return /^(\d+.)*(\d+)$/.test(str);
-  }
+  const inputRef = useRef(null);
 
   const changeInputHandler = async () => {
     if (Number(inputRef.current.value) === 0) {
       setBalanceError(false);
       dispatch(setInputAmount(0));
+      dispatch(setTokenPriceOut("0"));
       return;
     }
     if (!containsOnlyNumbers(inputRef.current.value) || !isLoggedIn) {
@@ -49,14 +58,16 @@ function SwapSection() {
     const input = Number(inputRef.current.value);
 
     await dispatch(getPriceToken(input)).unwrap();
+    await dispatch(getPriceSwap(input)).unwrap();
 
     const balance = await provider.getBalance(accountAddress);
-    console.log(balance);
+
     balance < input && setBalanceError(true);
+
+    setAmount(input);
   };
 
   useEffect(() => {
-    console.log(accountAddress === "");
     if (accountAddress === "") {
       setIsLoggedIn(false);
       return;
@@ -73,10 +84,10 @@ function SwapSection() {
     <div className={styles.swapSection}>
       <div className={styles.swapWrapper}>
         <h3>Swap</h3>
-        <form onSubmit={swapHandler}>
+        <form>
           <div className={styles.swapInputWrapper}>
             <label>You pay</label>
-            <div>
+            <div className={styles.inputContainer}>
               <input
                 type="text"
                 disabled={!isLoggedIn}
@@ -84,18 +95,36 @@ function SwapSection() {
                 ref={inputRef}
                 placeholder="0.0ETH"
               />
-              <img src={ethLogo} alt="ethereum logo" />
+              <div className={styles.tokenInfo}>
+                <img src={ethLogo} alt="ethereum logo" />
+                <p>ETH</p>
+              </div>
             </div>
           </div>
           <div className={styles.swapInputWrapper}>
             <label>You receive</label>
-            <div>
-              <input type="text" value={tokeOutput} placeholder="0.0MTC" />
-              <img src={mtcLogo} alt="ethereum logo" />
+            <div className={styles.inputContainer}>
+              <input
+                type="text"
+                value={
+                  inputRef === null || inputRef?.current?.value !== ""
+                    ? listBestPrice(tokeOutputSushi, tokeOutputBancor)
+                    : "-"
+                }
+                placeholder="0.0MTC"
+              />
+              <div className={styles.tokenInfo}>
+                <img src={mtcLogo} alt="matic logo" />
+                <p>MTC</p>
+              </div>
             </div>
             {accountAddress !== "" && <DisplayPrices />}
           </div>
-          <SwapButton balanceError={balanceError} isLoggedIn={isLoggedIn} />
+          <SwapButton
+            balanceError={balanceError}
+            value={Amount}
+            isLoggedIn={isLoggedIn}
+          />
         </form>
       </div>
     </div>

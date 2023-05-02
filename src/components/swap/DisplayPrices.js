@@ -21,8 +21,8 @@ function DisplayPrices() {
   useEffect(() => {
     (async () => {
       if (reserveToken0 === 0) return;
-      dispatch(getPriceSwap(1)).unwrap();
-      dispatch(getPriceToken(1)).unwrap();
+      await dispatch(getPriceSwap(1)).unwrap();
+      await dispatch(getPriceToken(1)).unwrap();
     })();
   }, [dispatch, reserveToken0]);
 

@@ -9,3 +9,27 @@
     }
   }
 }
+
+@mixin pricesLoading {
+  animation: loader 1.2s linear infinite alternate-reverse;
+  @keyframes loader {
+    from {
+      background-position: left;
+    }
+    to {
+      background-position: right;
+    }
+  }
+}
+
+@mixin astrunaut-hovering {
+  animation: hovering 8s linear infinite alternate-reverse;
+  @keyframes hovering {
+    from {
+      transform: translateY(1rem) scale(0.1);
+    }
+    to {
+      transform: translateY(-1rem) scale(0.1);
+    }
+  }
+}

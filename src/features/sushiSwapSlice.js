@@ -29,7 +29,7 @@ export const sushiswapSlice = createSlice({
       state.sushiRouterContract = action.payload;
     },
     setTokenPriceOut(state, action) {
-      state.tokenPriceOut = action.payload;
+      state.tokenPriceSushi = action.payload;
     },
   },
   extraReducers(builder) {
@@ -97,4 +97,5 @@ export const getPriceSwap = createAsyncThunk(
   }
 );
 
-export const { setFactoryContract, setRouterContract } = sushiswapSlice.actions;
+export const { setTokenPriceOut, setFactoryContract, setRouterContract } =
+  sushiswapSlice.actions;

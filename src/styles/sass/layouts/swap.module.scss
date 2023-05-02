@@ -27,7 +27,7 @@
   align-items: center;
   gap: 0.5rem;
   color: $secondaryColLight2;
-  & div {
+  & .inputContainer {
     width: 100%;
     position: relative;
     & input {
@@ -41,20 +41,37 @@
     }
     & img {
       width: 3rem;
-      position: absolute;
+      // position: absolute;
       top: 50%;
       right: 18%;
-      transform: translateY(-50%);
+      // transform: translateY(-50%);
     }
   }
   &:nth-of-type(2) {
     box-sizing: border-box;
     background-color: $secondaryColDark2;
-    margin: 0rem 2rem;
-    margin-top: 2rem;
+    margin: 2rem 2rem 0rem 1rem;
+    padding-bottom: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     border-radius: $SwapBoxBroderRadius;
+  }
+}
+
+.tokenInfo {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  top: 2%;
+  right: 15%;
+  gap: 0.8rem;
+  background-color: $secondaryColLight2;
+  padding: 0.1rem 0.5rem 0.1rem 0rem;
+  border-radius: $SwapBoxBroderRadius;
+  box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.2) inset;
+  & p {
+    margin: 0;
+    color: $secondaryWhite;
   }
 }

@@ -1,5 +1,51 @@
+@import "../utils/variables.scss";
+@import "../utils/animations.scss";
 @import "../layouts/pages.scss";
 
 .homePage {
   @include pagesLayout;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.imgWrapper {
+  flex-basis: 50%;
+  height: 100%;
+  & .moon {
+    position: absolute;
+    top: -10%;
+    right: 0%;
+    transform: scale(0.5);
+    filter: drop-shadow($moonshadow);
+  }
+  & img:nth-child(2) {
+    position: absolute;
+    top: -55%;
+    right: 5%;
+    transform: scale(0.1);
+    @include astrunaut-hovering;
+  }
+}
+
+.heading {
+  position: absolute;
+  top: 5%;
+  left: 12%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  & h1 {
+    color: $primaryCol;
+    font-size: 3rem;
+    font-family: "Nunito";
+    font-weight: 700;
+    margin: 0.5rem 0rem;
+  }
+  & p {
+    font-family: "Nunito";
+    color: $primaryWhite;
+    font-size: 1.4rem;
+    margin: 0;
+  }
 }
