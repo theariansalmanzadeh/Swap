@@ -31,11 +31,11 @@ function DisplayPrices() {
       {(isLoadingSushi || isLoadingBancor) && <PriceLoader />}
       <div className={styles.priceBox}>
         <p>Bancor : 1 ETH =</p>
-        <span>{tokenPriceBancor}MTC</span>
+        <span>{tokenPriceBancor}Matic</span>
       </div>
       <div className={styles.priceBox}>
         <p>SushiSwap : 1 ETH =</p>
-        <span>{tokenPriceSushi}MTC</span>
+        <span>{tokenPriceSushi}Matic</span>
       </div>
     </div>
   );

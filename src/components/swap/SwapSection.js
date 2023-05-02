@@ -115,7 +115,7 @@ function SwapSection() {
               />
               <div className={styles.tokenInfo}>
                 <img src={mtcLogo} alt="matic logo" />
-                <p>MTC</p>
+                <p>Matic</p>
               </div>
             </div>
             {accountAddress !== "" && <DisplayPrices />}
