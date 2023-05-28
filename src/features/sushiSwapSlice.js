@@ -75,7 +75,7 @@ export const getPairs = createAsyncThunk(
 
     [_reserve0, _reserve1] =
       wethAddress === token0 ? [_reserve0, _reserve1] : [_reserve1, _reserve0];
-    console.log(Number(_reserve0), Number(_reserve1));
+    console.log(poolContract);
     console.log(
       ethers.utils.formatEther(_reserve0),
       ethers.utils.formatEther(_reserve1)
